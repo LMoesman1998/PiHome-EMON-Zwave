@@ -1,0 +1,20 @@
+{
+  "name": "PiHome-EMON-Zwave",
+  "version": "1.0.0",
+  "description": "Zwave module for PiHome-EMON module",
+  "main": "src/index.js",
+  "author": "Lars Moesman",
+  "license": "MIT",
+  "scripts": {
+    "build": "mkdir -p build && babel src -d build && cp package.json yarn.lock build/ && yarn --cwd build install --modules-folder build/node_modules --production",
+    "main": "yarn build && cd build && node index.js"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2"
+  },
+  "dependencies": {
+    "openzwave-shared": "^1.5.4"
+  }
+}
