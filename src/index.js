@@ -37,14 +37,27 @@ zwave.on('node ready', (nodeId, nodeInfo) => {
   ---------------------------------------------------------
   `));
 
-  zwave.setConfigParam(2, 1, 0, 1);
-  zwave.setConfigParam(2, 14, 5, 2);
-  //zwave.requestConfigParam(2, 1);
-  //zwave.setValue({ node_id:2, class_id: 112, instance:1, index:1}, 1);
-  zwave.setValue({ node_id:2, class_id: 37, instance:1, index:0}, true);
+  switch(nodeId) {
+    // Yes it starts with one, not developer friendly 😉
+    case 1: {
+      // Controller
+      break;
+    }
+    case 2: {
+      // In my case the fibaro wall plug
+      zwave.setConfigParam(2, 1, 0, 1);   // Set 'Always On' to Active (0), default is Inactive (1)
+      zwave.setConfigParam(2, 14, 5, 2);  // Set 'Periodic power and enery report' to 5 seconds, default is 3600.
+
+      // Try if 'Always On' works
+      zwave.setValue({ node_id:2, class_id: 37, instance:1, index:0}, false);
+      break;
+    }
+  };
+
 });
 zwave.on('value changed', function(nodeid, comclass, value) {
   console.log("yo");
+  // Logs report
   console.log('node%d event %d set to %s', nodeid, comclass, value.value);
 });
 
