@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "build": "mkdir -p build && babel src -d build && cp package.json yarn.lock build/ && yarn --cwd build install --modules-folder build/node_modules --production",
-    "main": "yarn build && cd build && node index.js"
+    "main": "yarn build && cd build && node index.js",
+    "dist": "yarn build && mkdir -p dist && cd build && rm -rf node_modules && zip -r ../dist/pihome-zwave.zip *"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",

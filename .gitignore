@@ -63,3 +63,5 @@ typings/
 src/config\.js
 
 build/
+
+dist/
